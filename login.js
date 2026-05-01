@@ -920,16 +920,13 @@ function injetarEstilosLogin() {
 // =========================================
 //  INICIALIZAÇÃO
 // =========================================
-document.addEventListener("DOMContentLoaded", () => {
-  carregarSessao();
-  injetarBotaoNav();
-  atualizarNavPerfil();
+carregarSessao();
+injetarBotaoNav();
+atualizarNavPerfil();
 
-  // Atalho de teclado: Escape fecha tudo
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") {
-      fecharLoginModal();
-      fecharPainelPerfil();
-    }
-  });
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    fecharLoginModal();
+    fecharPainelPerfil();
+  }
 });
