@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bonk Polo League</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+/* =========================================
+   BONK POLO LEAGUE — Design System
+   Estética: Dark Esportivo / Aquático
+   ========================================= */
+
+:root {
+  --blue:    #00c2ff;
+  --blue-d:  #0090cc;
+  --blue-dim:#00c2ff18;
+  --bg:      #060d17;
+  --bg2:     #0c1824;
+  --bg3:     #111f2e;
+  --surface: #0f1c2a;
+  --border:  #1a3048;
+  --border2: #1e3a58;
+  --text:    #e8f4fd;
+  --text2:   #7a9bb5;
+  --text3:   #3d5f78;
+  --gold:    #f5a623;
+  --silver:  #c0cfd8;
+  --bronze:  #cd7f32;
+  --win:     #22c55e;
+  --loss:    #ef4444;
+  --draw:    #f59e0b;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --radius: 10px;
+  --radius-lg: 16px;
+}
+
+/* RESET */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* CONTAINER */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* =========================================
+   NAVBAR
+   ========================================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.navbar.scrolled {
+  background: rgba(6, 13, 23, 0.95);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 var(--border);
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+.nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--text);
+  background: var(--bg3);
+}
+.nav-discord {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: #5865f2;
+  padding: 7px 14px;
+  border-radius: 7px;
+  margin-left: 8px;
+  transition: opacity 0.2s;
+}
+.nav-discord:hover { opacity: 0.85; }
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+  margin-left: auto;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 1px;
+  transition: 0.3s;
+}
+
+/* MOBILE MENU */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.mobile-menu.open { display: flex; }
+.mob-link {
+  font-size: 24px;
+  font-family: var(--font-display);
+  letter-spacing: 0.1em;
+  color: var(--text2);
+  padding: 10px 30px;
+  transition: color 0.2s;
+}
+.mob-link:hover { color: var(--blue); }
+.mob-link.discord {
+  margin-top: 16px;
+  background: #5865f2;
+  color: white;
+  border-radius: var(--radius);
+  font-size: 18px;
+}
+
+/* =========================================
+   HERO
+   ========================================= */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 24px 80px;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, transparent 70%);
+  opacity: 0.4;
+}
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: -50%;
+  width: 200%;
+  height: 200px;
+  border-radius: 50%;
+  opacity: 0.04;
+}
+.wave1 { background: var(--blue); animation: wave 8s linear infinite; }
+.wave2 { background: var(--blue); animation: wave 12s linear infinite reverse; height: 160px; bottom: -30px; opacity: 0.03; }
+.wave3 { background: #1a6aff; animation: wave 16s linear infinite; height: 240px; bottom: -60px; opacity: 0.02; }
+@keyframes wave {
+  0% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(-25%) scaleY(1.2); }
+  100% { transform: translateX(-50%) scaleY(1); }
+}
+
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 0.8s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-dim);
+  border: 1px solid #00c2ff30;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--blue);
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(72px, 14vw, 140px);
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+.hero-title-accent { color: var(--blue); }
+.hero-sub {
+  font-size: 18px;
+  color: var(--text2);
+  max-width: 480px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-block;
+  padding: 14px 28px;
+  background: var(--blue);
+  color: #001520;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: var(--radius);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px #00c2ff40; }
+.btn-ghost {
+  display: inline-block;
+  padding: 14px 28px;
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: var(--radius);
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 60px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 36px;
+}
+.hstat-num {
+  font-family: var(--font-display);
+  font-size: 40px;
+  color: var(--blue);
+  line-height: 1;
+}
+.hstat-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-top: 4px;
+}
+.hero-stat-divider { width: 1px; background: var(--border); align-self: stretch; }
+
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text3);
+  animation: bounce 2s ease infinite;
+  z-index: 2;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+/* =========================================
+   SECTIONS
+   ========================================= */
+.section { padding: 100px 0; }
+.section-alt { background: var(--bg2); }
+.section-header { margin-bottom: 48px; }
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 56px);
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1;
+}
+
+/* =========================================
+   CARDS / SHARED
+   ========================================= */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* =========================================
+   LOADING / SPINNER
+   ========================================= */
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px;
+  color: var(--text2);
+  font-size: 14px;
+}
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border2);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* =========================================
+   RANKING TABLE
+   ========================================= */
+.table-card { padding: 0; }
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.data-table th {
+  background: var(--bg3);
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text2);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+.data-table th.col-team { text-align: left; }
+.data-table th.col-pos { width: 44px; }
+.data-table th.col-pts { color: var(--blue); }
+.data-table td {
+  padding: 14px 16px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  color: var(--text2);
+  font-variant-numeric: tabular-nums;
+}
+.data-table td.col-team { text-align: left; }
+.data-table td.col-pts {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--text);
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--bg3); }
+.data-table tr.pos-1 td.col-pos { color: var(--gold); }
+.data-table tr.pos-2 td.col-pos { color: var(--silver); }
+.data-table tr.pos-3 td.col-pos { color: var(--bronze); }
+
+.team-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: var(--text);
+}
+.team-dot-rank {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.col-pos { font-family: var(--font-display); font-size: 18px; }
+
+.form-badges {
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+}
+.form-badge {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-badge.V { background: #22c55e20; color: #22c55e; }
+.form-badge.D { background: #ef444420; color: #ef4444; }
+.form-badge.E { background: #f59e0b20; color: #f59e0b; }
+
+.table-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text3);
+  background: var(--bg3);
+}
+
+/* =========================================
+   PARTIDAS
+   ========================================= */
+.partidas-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.tab-btn {
+  padding: 8px 20px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.tab-btn.active {
+  background: var(--blue);
+  color: #001520;
+  border-color: var(--blue);
+}
+.tab-btn:hover:not(.active) { border-color: var(--border2); color: var(--text); }
+
+.partidas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+.partida-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.partida-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.partida-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.partida-status {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.partida-status.enc  { background: #22c55e20; color: #22c55e; }
+.partida-status.prox { background: #f59e0b20; color: #f59e0b; }
+.partida-status.wip  { background: #ef444420; color: #ef4444; }
+.partida-data {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--font-mono);
+}
+.partida-teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.pt-team {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+}
+.pt-team.right { text-align: right; }
+.pt-placar {
+  font-family: var(--font-display);
+  font-size: 32px;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  white-space: nowrap;
+}
+.pt-vs {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text3);
+}
+
+/* =========================================
+   TIMES
+   ========================================= */
+.times-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+.time-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.time-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.time-card:hover { border-color: var(--blue); transform: translateY(-3px); }
+.time-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 20px;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+.time-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.time-jogadores {
+  font-size: 12px;
+  color: var(--text3);
+  margin-bottom: 16px;
+}
+.time-stats-mini {
+  display: flex;
+  gap: 16px;
+}
+.tsm-item { display: flex; flex-direction: column; gap: 2px; }
+.tsm-val { font-family: var(--font-display); font-size: 20px; color: var(--blue); }
+.tsm-label { font-size: 10px; color: var(--text3); letter-spacing: 0.06em; }
+.time-ver {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--blue);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* =========================================
+   STATS
+   ========================================= */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.stats-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.stats-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  background: var(--bg3);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.stat-list { padding: 8px 0; }
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+}
+.stat-pos {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text3);
+  width: 16px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.stat-player { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; min-width: 0; }
+.stat-bar-wrap {
+  width: 80px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.stat-bar {
+  height: 4px;
+  background: var(--blue);
+  border-radius: 2px;
+  transition: width 0.6s ease;
+}
+.stat-val {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--blue);
+  min-width: 28px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* =========================================
+   TEMPORADAS
+   ========================================= */
+.temporadas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.temporada-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: border-color 0.2s;
+}
+.temporada-card:hover { border-color: var(--border2); }
+.temp-season {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+.temp-campeao {
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.temp-artilheiro {
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 16px;
+}
+.temp-stats {
+  display: flex;
+  gap: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.temp-stat { display: flex; flex-direction: column; gap: 2px; }
+.ts-val { font-family: var(--font-display); font-size: 22px; color: var(--text); }
+.ts-label { font-size: 11px; color: var(--text3); }
+
+/* =========================================
+   REGRAS
+   ========================================= */
+.regras-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.regra-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: border-color 0.2s;
+}
+.regra-card:hover { border-color: var(--border2); }
+.regra-icon {
+  font-family: var(--font-display);
+  font-size: 48px;
+  color: var(--blue-dim);
+  line-height: 1;
+  margin-bottom: 16px;
+  -webkit-text-stroke: 1px var(--border2);
+}
+.regra-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.regra-card p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+/* =========================================
+   DISCORD SECTION
+   ========================================= */
+.discord-section {
+  position: relative;
+  padding: 100px 0;
+  overflow: hidden;
+}
+.discord-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, #5865f220 0%, transparent 70%);
+}
+.discord-content {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.discord-content h2 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 56px);
+  letter-spacing: 0.04em;
+}
+.discord-content p {
+  font-size: 16px;
+  color: var(--text2);
+  max-width: 400px;
+}
+.btn-discord {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: #5865f2;
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: var(--radius);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-discord:hover { transform: translateY(-2px); box-shadow: 0 8px 24px #5865f240; }
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 40px 0;
+}
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  color: var(--text2);
+  margin-bottom: 8px;
+}
+.footer-copy { font-size: 13px; color: var(--text3); }
+.footer-note { font-size: 11px; color: var(--text3); }
+
+/* =========================================
+   MODAL
+   ========================================= */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 13, 23, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  max-width: 560px;
+  width: 100%;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: fadeUp 0.3s ease;
+}
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 24px;
+  color: var(--text3);
+  line-height: 1;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: var(--text); }
+.modal-team-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-team-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 28px;
+  flex-shrink: 0;
+}
+.modal-team-name { font-family: var(--font-display); font-size: 32px; letter-spacing: 0.04em; }
+.modal-team-info { font-size: 13px; color: var(--text2); margin-top: 2px; }
+.modal-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.modal-stat {
+  background: var(--bg3);
+  border-radius: var(--radius);
+  padding: 14px;
+  text-align: center;
+}
+.modal-stat-val { font-family: var(--font-display); font-size: 28px; color: var(--blue); }
+.modal-stat-label { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.modal-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text2);
+  margin-bottom: 12px;
+}
+.modal-player-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.modal-player-row:last-child { border-bottom: none; }
+.modal-player-name { color: var(--text); font-weight: 500; }
+.modal-player-role { color: var(--text3); font-size: 12px; }
+
+/* =========================================
+   EMPTY STATE
+   ========================================= */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 60px 24px;
+  color: var(--text3);
+  font-size: 14px;
+  text-align: center;
+  grid-column: 1 / -1;
+}
+.empty-icon { font-size: 40px; opacity: 0.4; margin-bottom: 4px; }
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .hero-stat { padding: 16px 20px; }
+  .hstat-num { font-size: 28px; }
+  .hero-stats { flex-wrap: wrap; }
+}
+@media (max-width: 600px) {
+  .hero-stats { flex-direction: column; gap: 0; }
+  .hero-stat-divider { width: 100%; height: 1px; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .section { padding: 64px 0; }
+  .data-table th:nth-child(n+5),
+  .data-table td:nth-child(n+5) { display: none; }
+}
+
+/* BLOCOS DE REGRAS */
+.regras-bloco { margin-bottom: 48px; }
+.regras-bloco:last-child { margin-bottom: 0; }
+.regras-bloco-titulo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 0.05em;
+  color: var(--blue);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.regras-bloco-icon { font-size: 22px; }
+.regra-card code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: var(--bg3);
+  color: var(--blue);
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border2);
+}
+.regra-card strong { color: var(--text); font-weight: 600; }
+.regra-card em { color: var(--text2); font-style: normal; font-weight: 500; }
+
+</style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#inicio" class="nav-logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <circle cx="14" cy="14" r="13" stroke="#00c2ff" stroke-width="1.5"/>
+          <ellipse cx="14" cy="14" rx="5" ry="10" stroke="#00c2ff" stroke-width="1.5" transform="rotate(30 14 14)"/>
+          <ellipse cx="14" cy="14" rx="5" ry="10" stroke="#00c2ff" stroke-width="1.5" transform="rotate(-30 14 14)"/>
+          <circle cx="14" cy="14" r="3" fill="#00c2ff"/>
+        </svg>
+        <span>BONK POLO</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#inicio" class="nav-link active">Início</a></li>
+        <li><a href="#ranking" class="nav-link">Ranking</a></li>
+        <li><a href="#partidas" class="nav-link">Partidas</a></li>
+        <li><a href="#times" class="nav-link">Times</a></li>
+        <li><a href="#stats" class="nav-link">Estatísticas</a></li>
+        <li><a href="#temporadas" class="nav-link">Temporadas</a></li>
+        <li><a href="#regras" class="nav-link">Regras</a></li>
+        <li><a href="https://discord.gg/vNb3UJhnUK" target="_blank" class="nav-discord">Discord</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#inicio" class="mob-link">Início</a>
+    <a href="#ranking" class="mob-link">Ranking</a>
+    <a href="#partidas" class="mob-link">Partidas</a>
+    <a href="#times" class="mob-link">Times</a>
+    <a href="#stats" class="mob-link">Estatísticas</a>
+    <a href="#temporadas" class="mob-link">Temporadas</a>
+    <a href="#regras" class="mob-link">Regras</a>
+    <a href="https://SEU-LINK-AQUI" target="_blank" class="mob-link discord">Discord</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <div class="hero-bg">
+      <div class="wave wave1"></div>
+      <div class="wave wave2"></div>
+      <div class="wave wave3"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Temporada Ativa
+      </div>
+      <h1 class="hero-title">BONK POLO<br><span class="hero-title-accent">LEAGUE</span></h1>
+      <p class="hero-sub">Campeonato oficial de polo aquático no Bonk.io.<br>Rankings, estatísticas e confrontos em alto nível.</p>
+      <div class="hero-actions">
+        <a href="#ranking" class="btn-primary">Ver Ranking</a>
+        <a href="#partidas" class="btn-ghost">Próximas Partidas</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat" id="statTimes"><span class="hstat-num">—</span><span class="hstat-label">Times</span></div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat" id="statPartidas"><span class="hstat-num">—</span><span class="hstat-label">Partidas</span></div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat" id="statGols"><span class="hstat-num">—</span><span class="hstat-label">Gols</span></div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat" id="statJogadores"><span class="hstat-num">—</span><span class="hstat-label">Jogadores</span></div>
+    </div>
+    <a href="#ranking" class="hero-scroll">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </section>
+
+  <!-- RANKING -->
+  <section id="ranking" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">CLASSIFICAÇÃO</div>
+        <h2 class="section-title">Ranking de Times</h2>
+      </div>
+      <div class="card table-card" id="rankingCard">
+        <div class="loading-state" id="rankingLoading">
+          <div class="spinner"></div>
+          <span>Carregando dados...</span>
+        </div>
+        <table class="data-table" id="tabelaRanking" style="display:none">
+          <thead>
+            <tr>
+              <th class="col-pos">#</th>
+              <th class="col-team">Time</th>
+              <th>J</th>
+              <th>V</th>
+              <th>E</th>
+              <th>D</th>
+              <th>GP</th>
+              <th>GC</th>
+              <th>SG</th>
+              <th class="col-pts">Pts</th>
+              <th class="col-form">Forma</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div class="table-legend">
+          <span>J=Jogos</span><span>V=Vitórias</span><span>E=Empates</span><span>D=Derrotas</span><span>GP=Gols Pró</span><span>GC=Gols Contra</span><span>SG=Saldo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTIDAS -->
+  <section id="partidas" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">JOGOS</div>
+        <h2 class="section-title">Partidas</h2>
+      </div>
+      <div class="partidas-tabs">
+        <button class="tab-btn active" data-tab="recentes">Recentes</button>
+        <button class="tab-btn" data-tab="proximas">Próximas</button>
+      </div>
+      <div class="partidas-grid" id="partidasRecentes">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <span>Carregando partidas...</span>
+        </div>
+      </div>
+      <div class="partidas-grid" id="partidasProximas" style="display:none">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <span>Carregando partidas...</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMES -->
+  <section id="times" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">ELENCOS</div>
+        <h2 class="section-title">Times</h2>
+      </div>
+      <div class="times-grid" id="timesGrid">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <span>Carregando times...</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTATÍSTICAS -->
+  <section id="stats" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">DESEMPENHO</div>
+        <h2 class="section-title">Estatísticas</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stats-col">
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#00c2ff" stroke-width="1.5"/><path d="M8 5v3l2 2" stroke="#00c2ff" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Artilharia
+            </div>
+            <div class="loading-state" id="golsLoading"><div class="spinner"></div></div>
+            <div id="golsList" class="stat-list"></div>
+          </div>
+        </div>
+        <div class="stats-col">
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3v10" stroke="#00c2ff" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Assistências
+            </div>
+            <div class="loading-state" id="assistLoading"><div class="spinner"></div></div>
+            <div id="assistList" class="stat-list"></div>
+          </div>
+        </div>
+        <div class="stats-col">
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="9" rx="1" stroke="#00c2ff" stroke-width="1.5"/><path d="M5 4V3a3 3 0 016 0v1" stroke="#00c2ff" stroke-width="1.5"/></svg>
+              Defesas
+            </div>
+            <div class="loading-state" id="defesasLoading"><div class="spinner"></div></div>
+            <div id="defesasList" class="stat-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMPORADAS -->
+  <section id="temporadas" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">HISTÓRIA</div>
+        <h2 class="section-title">Temporadas Anteriores</h2>
+      </div>
+      <div class="temporadas-grid" id="temporadasGrid">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <span>Carregando histórico...</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGRAS -->
+  <section id="regras" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">REGULAMENTO</div>
+        <h2 class="section-title">Regras do Campeonato</h2>
+      </div>
+
+      <!-- CONDUTA -->
+      <div class="regras-bloco">
+        <div class="regras-bloco-titulo">
+          <span class="regras-bloco-icon">🤝</span>
+          Conduta Geral
+        </div>
+        <div class="regras-grid">
+          <div class="regra-card">
+            <div class="regra-icon">01</div>
+            <h3>Respeito</h3>
+            <p>Educação em primeiro lugar. Respeite todos os membros. Zoar amigos é diferente de ofender desconhecidos — saiba a diferença.</p>
+          </div>
+          <div class="regra-card">
+            <div class="regra-icon">02</div>
+            <h3>Sem spam</h3>
+            <p>Não metralhie mensagens ou imagens nos canais de chat. Spam atrapalha a conversa e pode travar o dispositivo de outros.</p>
+          </div>
+          <div class="regra-card">
+            <div class="regra-icon">03</div>
+            <h3>Xingamentos</h3>
+            <p>Xingamentos só são tolerados entre amigos e com contexto de brincadeira. Certifique-se de que a pessoa sabe que é zoeira.</p>
+          </div>
+          <div class="regra-card">
+            <div class="regra-icon">04</div>
+            <h3>Zero preconceito</h3>
+            <p>Racismo, machismo, homofobia, intolerância religiosa e qualquer forma de preconceito são estritamente proibidos. Todos somos iguais.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- REGULAMENTO DE PARTIDAS -->
+      <div class="regras-bloco">
+        <div class="regras-bloco-titulo">
+          <span class="regras-bloco-icon">🏊</span>
+          Regulamento de Partidas
+        </div>
+        <div class="regras-grid">
+          <div class="regra-card">
+            <div class="regra-icon">01</div>
+            <h3>Tempo de jogo</h3>
+            <p>Cada partida tem dois tempos de 10 minutos. Após o tempo, há um último lance válido até que ocorra gol ou a bola ultrapasse a linha do meio campo. Vence quem fizer mais gols.</p>
+          </div>
+          <div class="regra-card">
+            <div class="regra-icon">02</div>
+            <h3>Formato e substituições</h3>
+            <p>Partidas 2x2. Cada time pode usar uma substituição por tempo. O capitão digita <code>.S</code> após a bola passar do meio campo — o árbitro pausa e realiza a troca.</p>
+          </div>
+          <div class="regra-card">
+            <div class="regra-icon">03</div>
+            <h3>Pausas</h3>
+            <p>Cada time tem 2 pausas curtas (30s) e 1 pausa longa (3min) por tempo, mais 1 pausa técnica (10min) por jogo. Comandos: <code>.PC</code>, <code>.PL</code> e <code>.PT</code>. O árbitro aguarda o ataque encerrar.</p>
+          </div>
+          <div class="regra-card">
+            <div class="regra-icon">04</div>
+            <h3>Início e retomada</h3>
+            <p>Para o jogo começar ou retomar, ambas as equipes precisam estar com o botão <strong>Ready</strong> ativado.</p>
+          </div>
+          <div class="regra-card">
+            <div class="regra-icon">05</div>
+            <h3>Fair Play (lag)</h3>
+            <p>Em lances de lag, cabe ao time adversário decidir se cede o fair play. Lances em que o FP é cedido geram pontuação no ranking.</p>
+          </div>
+          <div class="regra-card">
+            <div class="regra-icon">06</div>
+            <h3>Punições</h3>
+            <p>Spam, uso de VPN ou lagbot resultam em cartão amarelo (2 = vermelho) ou cartão vermelho direto (expulsão), a critério do árbitro.</p>
+          </div>
+          <div class="regra-card">
+            <div class="regra-icon">07</div>
+            <h3>Identidade</h3>
+            <p>Proibido jogar por outra pessoa. Em caso de suspeita, a administração pode exigir telagem em chamada. Confirmada a fraude, a equipe é expulsa do campeonato.</p>
+          </div>
+          <div class="regra-card">
+            <div class="regra-icon">08</div>
+            <h3>Loan</h3>
+            <p>Se um jogador faltar e o time estiver no mínimo, é permitido usar um <em>loan</em> (jogador autorizado pelo time adversário) para completar a equipe.</p>
+          </div>
+          <div class="regra-card">
+            <div class="regra-icon">09</div>
+            <h3>Token e W.O.</h3>
+            <p>Cada time tem 1 token por campeonato para adiar uma partida por uma semana. W.O. é cedido ao time que mais se esforçou — jogadores do time ausente perdem pontos no ranking.</p>
+          </div>
+          <div class="regra-card">
+            <div class="regra-icon">10</div>
+            <h3>Má arbitragem</h3>
+            <p>Em caso de má arbitragem comprovada, o jogo é analisado e refeito, o árbitro é punido e todos os pontos e estatísticas da partida são anulados.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DISCORD CTA -->
+  <section class="discord-section">
+    <div class="discord-bg"></div>
+    <div class="container discord-content">
+      <h2>Entre na Comunidade</h2>
+      <p>Participe das partidas, anuncie resultados e fique por dentro de tudo pelo Discord oficial.</p>
+      <a href="https://SEU-LINK-AQUI" target="_blank" class="btn-discord">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.04.033.05a19.934 19.934 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Entrar no Discord
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <svg width="20" height="20" viewBox="0 0 28 28" fill="none">
+          <circle cx="14" cy="14" r="13" stroke="#00c2ff" stroke-width="1.5"/>
+          <ellipse cx="14" cy="14" rx="5" ry="10" stroke="#00c2ff" stroke-width="1.5" transform="rotate(30 14 14)"/>
+          <ellipse cx="14" cy="14" rx="5" ry="10" stroke="#00c2ff" stroke-width="1.5" transform="rotate(-30 14 14)"/>
+          <circle cx="14" cy="14" r="3" fill="#00c2ff"/>
+        </svg>
+        BONK POLO LEAGUE
+      </div>
+      <p class="footer-copy">© 2025 Bonk Polo League. Todos os direitos reservados.</p>
+      <p class="footer-note">Dados atualizados em tempo real via Google Sheets.</p>
+    </div>
+  </footer>
+
+  <!-- MODAL TIME -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close" id="modalClose">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+// =========================================
+//  BONK POLO LEAGUE — Script Principal
+//  Integração: Google Sheets via opensheet
+// =========================================
+
+const SHEET_ID = "1gLTV_QFIUtdHQ98HCOF0ZwaJCOyJ3oXtI9KRLd2g8DM";
+const API = `https://opensheet.elk.sh/${SHEET_ID}`;
+
+// Cores para os times (cycling)
+const TEAM_COLORS = [
+  "#00c2ff", "#818cf8", "#34d399", "#f59e0b",
+  "#f472b6", "#a78bfa", "#38bdf8", "#fb923c",
+  "#4ade80", "#c084fc"
+];
+const teamColorMap = {};
+
+function getTeamColor(name) {
+  if (!name) return TEAM_COLORS[0];
+  if (!teamColorMap[name]) {
+    const keys = Object.keys(teamColorMap).length;
+    teamColorMap[name] = TEAM_COLORS[keys % TEAM_COLORS.length];
+  }
+  return teamColorMap[name];
+}
+
+function getInitials(name) {
+  if (!name) return "?";
+  return name.split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2);
+}
+
+// =========================================
+//  FETCH HELPER
+// =========================================
+async function fetchAba(aba) {
+  try {
+    const res = await fetch(`${API}/${encodeURIComponent(aba)}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch (e) {
+    console.warn(`Aba "${aba}" não encontrada ou erro:`, e.message);
+    return [];
+  }
+}
+
+// =========================================
+//  NAVBAR
+// =========================================
+const navbar = document.getElementById("navbar");
+const navToggle = document.getElementById("navToggle");
+const mobileMenu = document.getElementById("mobileMenu");
+
+window.addEventListener("scroll", () => {
+  navbar.classList.toggle("scrolled", window.scrollY > 40);
+});
+
+navToggle.addEventListener("click", () => {
+  mobileMenu.classList.toggle("open");
+});
+
+document.querySelectorAll(".mob-link").forEach(link => {
+  link.addEventListener("click", () => mobileMenu.classList.remove("open"));
+});
+
+// Highlight nav link ativo
+const sections = document.querySelectorAll("section[id], .hero[id]");
+const navLinks = document.querySelectorAll(".nav-link");
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach(sec => {
+    if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
+  });
+}, { passive: true });
+
+// =========================================
+//  MODAL
+// =========================================
+const modalOverlay = document.getElementById("modalOverlay");
+const modalClose = document.getElementById("modalClose");
+const modalContent = document.getElementById("modalContent");
+
+function openModal(html) {
+  modalContent.innerHTML = html;
+  modalOverlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeModal() {
+  modalOverlay.classList.remove("open");
+  document.body.style.overflow = "";
+}
+modalClose.addEventListener("click", closeModal);
+modalOverlay.addEventListener("click", e => {
+  if (e.target === modalOverlay) closeModal();
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeModal();
+});
+
+// =========================================
+//  RANKING
+// =========================================
+async function carregarRanking() {
+  const data = await fetchAba("Ranking");
+  const loading = document.getElementById("rankingLoading");
+  const tabela = document.getElementById("tabelaRanking");
+  const tbody = tabela.querySelector("tbody");
+
+  loading.style.display = "none";
+  tabela.style.display = "table";
+
+  if (!data.length) {
+    tbody.innerHTML = `<tr><td colspan="11" style="text-align:center;padding:40px;color:var(--text3)">Nenhum dado encontrado</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = "";
+  data.forEach((linha, i) => {
+    const vals = Object.values(linha);
+    const pos = vals[0] || (i + 1);
+    const time = vals[1] || "—";
+    const cor = getTeamColor(time);
+    const posClass = i === 0 ? "pos-1" : i === 1 ? "pos-2" : i === 2 ? "pos-3" : "";
+
+    // Colunas dinâmicas: tenta pegar J V E D GP GC SG Pts Forma
+    // Adapta ao que existir na planilha
+    const J   = vals[2] || "—";
+    const V   = vals[3] || "—";
+    const E   = vals[4] || "—";
+    const D   = vals[5] || "—";
+    const GP  = vals[6] || "—";
+    const GC  = vals[7] || "—";
+    const SG  = vals[8] || "—";
+    const Pts = vals[9] !== undefined ? vals[9] : (vals[vals.length - 1] || "—");
+    const Forma = vals[10] || "";
+
+    let formaBadges = "";
+    if (Forma) {
+      Forma.split("").forEach(c => {
+        const cls = c === "V" ? "V" : c === "D" ? "D" : "E";
+        formaBadges += `<span class="form-badge ${cls}">${c}</span>`;
+      });
+    }
+
+    tbody.innerHTML += `
+      <tr class="${posClass}">
+        <td class="col-pos">${pos}</td>
+        <td class="col-team">
+          <div class="team-name">
+            <span class="team-dot-rank" style="background:${cor}"></span>
+            ${time}
+          </div>
+        </td>
+        <td>${J}</td>
+        <td>${V}</td>
+        <td>${E}</td>
+        <td>${D}</td>
+        <td>${GP}</td>
+        <td>${GC}</td>
+        <td>${SG}</td>
+        <td class="col-pts">${Pts}</td>
+        <td class="col-form"><div class="form-badges">${formaBadges || "—"}</div></td>
+      </tr>`;
+  });
+
+  // Atualizar hero stat
+  const el = document.querySelector("#statTimes .hstat-num");
+  if (el) el.textContent = data.length;
+}
+
+// =========================================
+//  PARTIDAS (RECENTES + PRÓXIMAS)
+// =========================================
+async function carregarPartidas() {
+  const [recentes, proximas] = await Promise.all([
+    fetchAba("Partidas"),
+    fetchAba("Proximas")
+  ]);
+
+  renderPartidas(recentes, "partidasRecentes", false);
+  renderPartidas(proximas, "partidasProximas", true);
+
+  // Contagem de partidas
+  const el = document.querySelector("#statPartidas .hstat-num");
+  if (el) el.textContent = recentes.length || "—";
+}
+
+function renderPartidas(data, containerId, proximas) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+
+  if (!data.length) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">📅</div>
+        <span>${proximas ? "Nenhuma partida agendada" : "Nenhuma partida registrada"}</span>
+        <small>Adicione dados na aba "${proximas ? "Proximas" : "Partidas"}" da planilha</small>
+      </div>`;
+    return;
+  }
+
+  data.forEach(linha => {
+    const vals = Object.values(linha);
+    const data_jogo = vals[0] || "";
+    const timeA = vals[1] || "?";
+    const golsA = vals[2] !== undefined ? vals[2] : "";
+    const golsB = vals[3] !== undefined ? vals[3] : "";
+    const timeB = vals[4] || "?";
+    const status = vals[5] || (proximas ? "Próxima" : "Encerrado");
+
+    const statusClass = proximas ? "prox"
+      : status.toLowerCase().includes("w.o") ? "wip"
+      : "enc";
+
+    const placar = proximas
+      ? `<span class="pt-vs">vs</span>`
+      : `<span class="pt-placar">${golsA} — ${golsB}</span>`;
+
+    container.innerHTML += `
+      <div class="partida-card">
+        <div class="partida-meta">
+          <span class="partida-status ${statusClass}">${status}</span>
+          <span class="partida-data">${data_jogo}</span>
+        </div>
+        <div class="partida-teams">
+          <span class="pt-team">${timeA}</span>
+          ${placar}
+          <span class="pt-team right">${timeB}</span>
+        </div>
+      </div>`;
+  });
+}
+
+// Tabs partidas
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const tab = btn.dataset.tab;
+    document.getElementById("partidasRecentes").style.display = tab === "recentes" ? "grid" : "none";
+    document.getElementById("partidasProximas").style.display = tab === "proximas" ? "grid" : "none";
+  });
+});
+
+// =========================================
+//  TIMES
+// =========================================
+async function carregarTimes() {
+  const data = await fetchAba("Times");
+  const grid = document.getElementById("timesGrid");
+  grid.innerHTML = "";
+
+  if (!data.length) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🏊</div>
+        <span>Nenhum time cadastrado</span>
+        <small>Adicione dados na aba "Times" da planilha</small>
+      </div>`;
+    return;
+  }
+
+  // Armazenar dados para modal
+  const timesData = {};
+
+  data.forEach(linha => {
+    const vals = Object.values(linha);
+    const nome = vals[0] || "Time";
+    const jogadores = vals[1] || "—";
+    const vitorias = vals[2] || "0";
+    const gols = vals[3] || "0";
+    const cor = getTeamColor(nome);
+    timesData[nome] = { nome, jogadores, vitorias, gols, cor, raw: vals };
+
+    const card = document.createElement("div");
+    card.className = "time-card";
+    card.style.setProperty("--team-color", cor);
+    card.innerHTML = `
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${cor}"></div>
+      <div class="time-icon" style="background:${cor}20;color:${cor}">${getInitials(nome)}</div>
+      <div class="time-name">${nome}</div>
+      <div class="time-jogadores">${jogadores} jogadores</div>
+      <div class="time-stats-mini">
+        <div class="tsm-item">
+          <span class="tsm-val">${vitorias}</span>
+          <span class="tsm-label">VITÓRIAS</span>
+        </div>
+        <div class="tsm-item">
+          <span class="tsm-val">${gols}</span>
+          <span class="tsm-label">GOLS</span>
+        </div>
+      </div>
+      <div class="time-ver">Ver detalhes →</div>`;
+
+    card.addEventListener("click", () => abrirModalTime(timesData[nome]));
+    grid.appendChild(card);
+  });
+}
+
+function abrirModalTime(time) {
+  const cor = time.cor;
+  const vals = time.raw;
+  // A partir do índice 4, pode ter lista de jogadores separados por vírgula
+  const listaJogadores = (vals[4] || "").split(",").map(j => j.trim()).filter(Boolean);
+
+  const jogadoresHTML = listaJogadores.length
+    ? listaJogadores.map(j => `
+        <div class="modal-player-row">
+          <span class="modal-player-name">${j}</span>
+          <span class="modal-player-role">Jogador</span>
+        </div>`).join("")
+    : `<div style="color:var(--text3);font-size:13px;padding:12px 0">Nenhum jogador listado — adicione na coluna E da aba Times</div>`;
+
+  openModal(`
+    <div class="modal-team-header">
+      <div class="modal-team-icon" style="background:${cor}20;color:${cor}">${getInitials(time.nome)}</div>
+      <div>
+        <div class="modal-team-name">${time.nome}</div>
+        <div class="modal-team-info">${time.jogadores} jogadores</div>
+      </div>
+    </div>
+    <div class="modal-stats-row">
+      <div class="modal-stat">
+        <div class="modal-stat-val">${time.vitorias}</div>
+        <div class="modal-stat-label">Vitórias</div>
+      </div>
+      <div class="modal-stat">
+        <div class="modal-stat-val">${time.gols}</div>
+        <div class="modal-stat-label">Gols</div>
+      </div>
+      <div class="modal-stat">
+        <div class="modal-stat-val">${time.jogadores}</div>
+        <div class="modal-stat-label">Jogadores</div>
+      </div>
+    </div>
+    <div class="modal-section-title">Elenco</div>
+    ${jogadoresHTML}
+  `);
+}
+
+// =========================================
+//  ESTATÍSTICAS
+// =========================================
+async function carregarStats() {
+  const [gols, assist, defesas] = await Promise.all([
+    fetchAba("Gols"),
+    fetchAba("Assistencias"),
+    fetchAba("Defesas")
+  ]);
+
+  renderStatList(gols, "golsList", "golsLoading");
+  renderStatList(assist, "assistList", "assistLoading");
+  renderStatList(defesas, "defesasList", "defesasLoading");
+
+  // Hero stat gols
+  const elGols = document.querySelector("#statGols .hstat-num");
+  if (elGols && gols.length) {
+    const total = gols.reduce((acc, l) => acc + (parseInt(Object.values(l)[1]) || 0), 0);
+    elGols.textContent = total || "—";
+  }
+
+  // Hero stat jogadores
+  const elJog = document.querySelector("#statJogadores .hstat-num");
+  if (elJog && gols.length) elJog.textContent = gols.length;
+}
+
+function renderStatList(data, listId, loadingId) {
+  const loading = document.getElementById(loadingId);
+  const list = document.getElementById(listId);
+  if (loading) loading.style.display = "none";
+
+  if (!data.length) {
+    list.innerHTML = `<div style="padding:20px;text-align:center;color:var(--text3);font-size:13px">Nenhum dado encontrado</div>`;
+    return;
+  }
+
+  const maxVal = Math.max(...data.map(l => parseInt(Object.values(l)[1]) || 0));
+
+  data.slice(0, 10).forEach((linha, i) => {
+    const vals = Object.values(linha);
+    const jogador = vals[0] || "—";
+    const valor = parseInt(vals[1]) || 0;
+    const pct = maxVal > 0 ? (valor / maxVal * 100) : 0;
+
+    list.innerHTML += `
+      <div class="stat-row">
+        <span class="stat-pos">${i + 1}</span>
+        <span class="stat-player">${jogador}</span>
+        <div class="stat-bar-wrap"><div class="stat-bar" style="width:${pct}%"></div></div>
+        <span class="stat-val">${valor}</span>
+      </div>`;
+  });
+}
+
+// =========================================
+//  TEMPORADAS ANTERIORES
+// =========================================
+async function carregarTemporadas() {
+  const data = await fetchAba("Temporadas");
+  const grid = document.getElementById("temporadasGrid");
+  grid.innerHTML = "";
+
+  if (!data.length) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🏆</div>
+        <span>Nenhuma temporada anterior registrada</span>
+        <small>Adicione dados na aba "Temporadas" da planilha</small>
+      </div>`;
+    return;
+  }
+
+  data.forEach(linha => {
+    const vals = Object.values(linha);
+    const temporada  = vals[0] || "—";
+    const campeao    = vals[1] || "—";
+    const artilheiro = vals[2] || "—";
+    const partidas   = vals[3] || "—";
+    const gols       = vals[4] || "—";
+    const cor        = getTeamColor(campeao);
+
+    grid.innerHTML += `
+      <div class="temporada-card">
+        <div class="temp-season">TEMPORADA ${temporada}</div>
+        <div class="temp-campeao" style="color:${cor}">🏆 ${campeao}</div>
+        <div class="temp-artilheiro">Artilheiro: ${artilheiro}</div>
+        <div class="temp-stats">
+          <div class="temp-stat">
+            <span class="ts-val">${partidas}</span>
+            <span class="ts-label">Partidas</span>
+          </div>
+          <div class="temp-stat">
+            <span class="ts-val">${gols}</span>
+            <span class="ts-label">Gols</span>
+          </div>
+        </div>
+      </div>`;
+  });
+}
+
+// =========================================
+//  INICIALIZAR TUDO
+// =========================================
+async function init() {
+  await Promise.all([
+    carregarRanking(),
+    carregarPartidas(),
+    carregarTimes(),
+    carregarStats(),
+    carregarTemporadas()
+  ]);
+}
+
+document.addEventListener("DOMContentLoaded", init);
+
+</script>
+</body>
+</html>
