@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bonk Polo League</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#inicio" class="nav-logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <circle cx="14" cy="14" r="13" stroke="#00c2ff" stroke-width="1.5"/>
+          <ellipse cx="14" cy="14" rx="5" ry="10" stroke="#00c2ff" stroke-width="1.5" transform="rotate(30 14 14)"/>
+          <ellipse cx="14" cy="14" rx="5" ry="10" stroke="#00c2ff" stroke-width="1.5" transform="rotate(-30 14 14)"/>
+          <circle cx="14" cy="14" r="3" fill="#00c2ff"/>
+        </svg>
+        <span>BONK POLO</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#inicio" class="nav-link active">Início</a></li>
+        <li><a href="#ranking" class="nav-link">Ranking</a></li>
+        <li><a href="#partidas" class="nav-link">Partidas</a></li>
+        <li><a href="#times" class="nav-link">Times</a></li>
+        <li><a href="#stats" class="nav-link">Estatísticas</a></li>
+        <li><a href="#temporadas" class="nav-link">Temporadas</a></li>
+        <li><a href="#regras" class="nav-link">Regras</a></li>
+        <li><a href="https://SEU-LINK-AQUI" target="_blank" class="nav-discord">Discord</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#inicio" class="mob-link">Início</a>
+    <a href="#ranking" class="mob-link">Ranking</a>
+    <a href="#partidas" class="mob-link">Partidas</a>
+    <a href="#times" class="mob-link">Times</a>
+    <a href="#stats" class="mob-link">Estatísticas</a>
+    <a href="#temporadas" class="mob-link">Temporadas</a>
+    <a href="#regras" class="mob-link">Regras</a>
+    <a href="https://SEU-LINK-AQUI" target="_blank" class="mob-link discord">Discord</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <div class="hero-bg">
+      <div class="wave wave1"></div>
+      <div class="wave wave2"></div>
+      <div class="wave wave3"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Temporada Ativa
+      </div>
+      <h1 class="hero-title">BONK POLO<br><span class="hero-title-accent">LEAGUE</span></h1>
+      <p class="hero-sub">Campeonato oficial de polo aquático no Bonk.io.<br>Rankings, estatísticas e confrontos em alto nível.</p>
+      <div class="hero-actions">
+        <a href="#ranking" class="btn-primary">Ver Ranking</a>
+        <a href="#partidas" class="btn-ghost">Próximas Partidas</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat" id="statTimes"><span class="hstat-num">—</span><span class="hstat-label">Times</span></div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat" id="statPartidas"><span class="hstat-num">—</span><span class="hstat-label">Partidas</span></div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat" id="statGols"><span class="hstat-num">—</span><span class="hstat-label">Gols</span></div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat" id="statJogadores"><span class="hstat-num">—</span><span class="hstat-label">Jogadores</span></div>
+    </div>
+    <a href="#ranking" class="hero-scroll">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </section>
+
+  <!-- RANKING -->
+  <section id="ranking" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">CLASSIFICAÇÃO</div>
+        <h2 class="section-title">Ranking de Times</h2>
+      </div>
+      <div class="card table-card" id="rankingCard">
+        <div class="loading-state" id="rankingLoading">
+          <div class="spinner"></div>
+          <span>Carregando dados...</span>
+        </div>
+        <table class="data-table" id="tabelaRanking" style="display:none">
+          <thead>
+            <tr>
+              <th class="col-pos">#</th>
+              <th class="col-team">Time</th>
+              <th>J</th>
+              <th>V</th>
+              <th>E</th>
+              <th>D</th>
+              <th>GP</th>
+              <th>GC</th>
+              <th>SG</th>
+              <th class="col-pts">Pts</th>
+              <th class="col-form">Forma</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div class="table-legend">
+          <span>J=Jogos</span><span>V=Vitórias</span><span>E=Empates</span><span>D=Derrotas</span><span>GP=Gols Pró</span><span>GC=Gols Contra</span><span>SG=Saldo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTIDAS -->
+  <section id="partidas" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">JOGOS</div>
+        <h2 class="section-title">Partidas</h2>
+      </div>
+      <div class="partidas-tabs">
+        <button class="tab-btn active" data-tab="recentes">Recentes</button>
+        <button class="tab-btn" data-tab="proximas">Próximas</button>
+      </div>
+      <div class="partidas-grid" id="partidasRecentes">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <span>Carregando partidas...</span>
+        </div>
+      </div>
+      <div class="partidas-grid" id="partidasProximas" style="display:none">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <span>Carregando partidas...</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMES -->
+  <section id="times" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">ELENCOS</div>
+        <h2 class="section-title">Times</h2>
+      </div>
+      <div class="times-grid" id="timesGrid">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <span>Carregando times...</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTATÍSTICAS -->
+  <section id="stats" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">DESEMPENHO</div>
+        <h2 class="section-title">Estatísticas</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stats-col">
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#00c2ff" stroke-width="1.5"/><path d="M8 5v3l2 2" stroke="#00c2ff" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Artilharia
+            </div>
+            <div class="loading-state" id="golsLoading"><div class="spinner"></div></div>
+            <div id="golsList" class="stat-list"></div>
+          </div>
+        </div>
+        <div class="stats-col">
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3v10" stroke="#00c2ff" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Assistências
+            </div>
+            <div class="loading-state" id="assistLoading"><div class="spinner"></div></div>
+            <div id="assistList" class="stat-list"></div>
+          </div>
+        </div>
+        <div class="stats-col">
+          <div class="stats-card">
+            <div class="stats-card-header">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="9" rx="1" stroke="#00c2ff" stroke-width="1.5"/><path d="M5 4V3a3 3 0 016 0v1" stroke="#00c2ff" stroke-width="1.5"/></svg>
+              Defesas
+            </div>
+            <div class="loading-state" id="defesasLoading"><div class="spinner"></div></div>
+            <div id="defesasList" class="stat-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMPORADAS -->
+  <section id="temporadas" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">HISTÓRIA</div>
+        <h2 class="section-title">Temporadas Anteriores</h2>
+      </div>
+      <div class="temporadas-grid" id="temporadasGrid">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <span>Carregando histórico...</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGRAS -->
+  <section id="regras" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">REGULAMENTO</div>
+        <h2 class="section-title">Regras do Campeonato</h2>
+      </div>
+      <div class="regras-grid">
+        <div class="regra-card">
+          <div class="regra-icon">01</div>
+          <h3>Formato</h3>
+          <p>As equipes se enfrentam em partidas de polo aquático no mapa oficial do Bonk.io. Cada temporada tem fase de grupos e playoffs.</p>
+        </div>
+        <div class="regra-card">
+          <div class="regra-icon">02</div>
+          <h3>Pontuação</h3>
+          <p>Vitória vale 3 pontos, empate 1 ponto e derrota 0 pontos. Em caso de empate no geral, o saldo de gols é o critério de desempate.</p>
+        </div>
+        <div class="regra-card">
+          <div class="regra-icon">03</div>
+          <h3>Times</h3>
+          <p>Cada time deve ter no mínimo 3 e no máximo 6 jogadores. O capitão é responsável pela presença e confirmação de datas.</p>
+        </div>
+        <div class="regra-card">
+          <div class="regra-icon">04</div>
+          <h3>Partidas</h3>
+          <p>As partidas são agendadas pelo Discord. Atrasos superiores a 10 minutos resultam em W.O. para o time presente.</p>
+        </div>
+        <div class="regra-card">
+          <div class="regra-icon">05</div>
+          <h3>Conduta</h3>
+          <p>Respeito é obrigatório. Toxicidade, trapaça ou abuso de bugs resultam em suspensão. Decisão final fica com a organização.</p>
+        </div>
+        <div class="regra-card">
+          <div class="regra-icon">06</div>
+          <h3>Resultados</h3>
+          <p>O placar deve ser registrado no Discord com print do resultado. A organização valida e atualiza a planilha oficial.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCORD CTA -->
+  <section class="discord-section">
+    <div class="discord-bg"></div>
+    <div class="container discord-content">
+      <h2>Entre na Comunidade</h2>
+      <p>Participe das partidas, anuncie resultados e fique por dentro de tudo pelo Discord oficial.</p>
+      <a href="https://SEU-LINK-AQUI" target="_blank" class="btn-discord">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.04.033.05a19.934 19.934 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Entrar no Discord
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <svg width="20" height="20" viewBox="0 0 28 28" fill="none">
+          <circle cx="14" cy="14" r="13" stroke="#00c2ff" stroke-width="1.5"/>
+          <ellipse cx="14" cy="14" rx="5" ry="10" stroke="#00c2ff" stroke-width="1.5" transform="rotate(30 14 14)"/>
+          <ellipse cx="14" cy="14" rx="5" ry="10" stroke="#00c2ff" stroke-width="1.5" transform="rotate(-30 14 14)"/>
+          <circle cx="14" cy="14" r="3" fill="#00c2ff"/>
+        </svg>
+        BONK POLO LEAGUE
+      </div>
+      <p class="footer-copy">© 2025 Bonk Polo League. Todos os direitos reservados.</p>
+      <p class="footer-note">Dados atualizados em tempo real via Google Sheets.</p>
+    </div>
+  </footer>
+
+  <!-- MODAL TIME -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close" id="modalClose">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
